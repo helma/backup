@@ -1,0 +1,9 @@
+[Unit]
+Description=Backups
+
+[Timer]
+OnBootSec=15min
+OnUnitInactiveSec=6h
+
+[Install]
+WantedBy=multi-user.target

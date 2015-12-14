@@ -1,17 +1,25 @@
 #!/bin/sh
-#https://wiki.archlinux.org/index.php/Full_system_backup_with_rsync
-# general
-#rsync -av --delete --delete-excluded --inplace --exclude-from=$HOME/.backup_exclude /home/ch /backup/`hostname`/home/
-#sudo rsync -aAXv --delete --delete-excluded --exclude-from=$HOME/.backup_exclude /home /etc /media/nfs/mirror/`hostname`/
-sudo rsync -aAHSv --delete --delete-excluded --exclude-from=$HOME/.backup_exclude /* /media/nfs/mirror/`hostname`/
-#sudo rsync -aAXHSv --delete --delete-excluded --exclude-from=$HOME/.backup_exclude /* /media/nfs/mirror/`hostname`/
-# archive
-#rsync -av --inplace /home/ch/archive /backup/`hostname`/home/ch/
-#rm -rf /home/ch/archive
-#mkdir /home/ch/archive
-# snapshot
-#sudo zfs snapshot "backup/zx81@`date +"%Y-%m-%d %T"`"
-# cleanup
-#/home/ch/src/backup/cleanup.rb
-# backup mail
-#rsync -av --inplace --exclude INBOX --exclude .notmuch /backup/`hostname`/home/ch/mail/ /backup/pim/mail/ && /home/ch/bin/trash `/usr/bin/notmuch search --output=files $(date +%s -d 2009-10-01)..$(date +%s -d "6 month ago")`
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+DATE=`date +%Y-%m-%dT%H:%M:%S`
+export BORG_PASSPHRASE=`cat $SCRIPTPATH/.pwd`
+START=$(date +%s.%N)
+if mountpoint -q /media/nfs; then
+  rsync -aHS --delete --delete-excluded --exclude-from=$SCRIPTPATH/exclude /* /media/nfs/mirror/`hostname`/
+  END=$(date +%s.%N)
+  DIFF=$(echo "$END - $START" | bc)
+  echo "rsync: $DIFF"
+  START=$(date +%s.%N)
+  if mountpoint -q /media/storagebox; then
+    borg create --exclude-caches --compression zlib /media/nfs/backup::`hostname`-$DATE /media/nfs/mirror/`hostname`
+    END=$(date +%s.%N)
+    DIFF=$(echo "$END - $START" | bc)
+    echo "borg: $DIFF"
+    START=$(date +%s.%N)
+    rsync -rltzu --delete /media/nfs/backup/* /media/storagebox/
+    END=$(date +%s.%N)
+    DIFF=$(echo "$END - $START" | bc)
+    echo "rsync: $DIFF"
+  fi
+fi
