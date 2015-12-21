@@ -11,7 +11,7 @@ if mountpoint -q /media/nfs; then
   #DIFF=$(echo "$END - $START" | bc)
   #echo "rsync: $DIFF"
   #START=$(date +%s.%N)
-  borg create --exclude-caches --compression zlib /media/nfs/backup::`hostname`-$DATE /
+  borg create -v --stats --exclude-caches --exclude-from $SCRIPTPATH/exclude --compression zlib /media/nfs/backup::`hostname`-$DATE /
   END=$(date +%s.%N)
   DIFF=$(echo "$END - $START" | bc)
   echo "borg: $DIFF"
