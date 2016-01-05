@@ -10,6 +10,6 @@ Description=Backup
 OnFailure=status-email@%n.service
 
 [Service]
-ExecStart=/home/ch/src/backup/backup.sh
+ExecStart=/home/ch/src/backup/sync-naspi.sh
 StandardOutput=syslog
 StandardError=syslog
