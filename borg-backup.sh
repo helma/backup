@@ -6,7 +6,7 @@ DATE=`date +%Y-%m-%dT%H:%M:%S`
 export BORG_PASSPHRASE=`cat $SCRIPTPATH/.pwd`
 START=$(date +%s.%N)
 if mountpoint -q /mnt/sda1; then
-  borg create -v --dry-run --stats --exclude-caches --exclude-from $SCRIPTPATH/exclude --compression zlib /mnt/sda1/backup::`hostname`-$DATE /
+  borg create -v --stats --exclude-caches --compression zlib /mnt/sda1/backup::mpc-$DATE /mnt/sda1/mirror/mpc
   END=$(date +%s.%N)
   DIFF=$(echo "$END - $START" | bc)
   echo "borg: $DIFF"
