@@ -1,8 +1,0 @@
-[Unit]
-Description=status email for %I to ch
-
-[Service]
-Type=oneshot
-ExecStart=/home/ch/src/backup/systemd-email helma@in-silico.ch %i
-User=root
-Group=systemd-journal

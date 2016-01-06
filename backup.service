@@ -1,15 +1,7 @@
-#  This file is part of systemd.
-#
-#  systemd is free software; you can redistribute it and/or modify it
-#  under the terms of the GNU Lesser General Public License as published by
-#  the Free Software Foundation; either version 2.1 of the License, or
-#  (at your option) any later version.
-
 [Unit]
 Description=Backup
-OnFailure=status-email@%n.service
 
 [Service]
-ExecStart=/home/ch/src/backup/sync-naspi.sh
+ExecStart=/home/ch/src/backup/backup.sh
 StandardOutput=syslog
 StandardError=syslog
