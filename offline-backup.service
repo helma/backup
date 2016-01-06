@@ -1,0 +1,7 @@
+[Unit]
+Description=Offline Backup
+
+[Service]
+ExecStart=/usr/bin/rsync -rltzuv --delete /mnt/sda1/backup/ /mnt/storagebox/
+StandardOutput=syslog
+StandardError=syslog
