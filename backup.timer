@@ -3,7 +3,7 @@ Description=Backups
 
 [Timer]
 OnBootSec=15min
-OnUnitInactiveSec=2h
+OnUnitInactiveSec=1d
 
 [Install]
 WantedBy=timers.target

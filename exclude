@@ -11,6 +11,8 @@ lost+found
 .*swp
 /etc/ssl
 tmp
+cache
+.cache
 /backup
 /home/ch/archive
 /home/ch/private
@@ -35,6 +37,7 @@ tmp
 /home/ch/VirtualBox VMs
 /home/ch/.tor-browser-en
 /home/ch/mail/Trash
-/home/ch/docker/*
+/home/ch/virtualbox
+/home/docker
 /var/lib/docker
 /root/.cache
