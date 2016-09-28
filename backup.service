@@ -1,7 +1,12 @@
 [Unit]
 Description=Backup
+Requires=dev-disk-by\x2duuid-1632b2b3\x2dbfbb\x2d48a9\x2db417\x2d05bcdbb41e63.device
+After=dev-disk-by\x2duuid-1632b2b3\x2dbfbb\x2d48a9\x2db417\x2d05bcdbb41e63.device
 
 [Service]
 ExecStart=/home/ch/src/backup/backup.sh
 StandardOutput=syslog
 StandardError=syslog
+
+[Install]
+WantedBy=dev-disk-by\x2duuid-1632b2b3\x2dbfbb\x2d48a9\x2db417\x2d05bcdbb41e63.device

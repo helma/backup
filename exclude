@@ -1,4 +1,4 @@
-lost+found
+/*/lost+found
 /dev/*
 /proc/*
 /sys/*
@@ -9,22 +9,19 @@ lost+found
 *.pyc
 *~
 .*swp
-/etc/ssl
-tmp
-cache
-.cache
+*iso
+/etc/ssl/
+/*/tmp
+/*/cache
+/*/.cache
 /backup
 /home/ch/archive
 /home/ch/private
 /home/ch/Downloads
 /home/ch/Download
-/home/ch/Dropbox/kunst*
-/home/ch/Dropbox/.dropbox*
 /home/ch/.adobe
 /home/ch/.trash
-/home/ch/.cache/*
-/home/ch/.dropbox-dist
-/home/ch/.dropbox
+/home/ch/.cache
 /home/ch/.local/share
 /home/ch/.macromedia
 /home/ch/.config/chromium
@@ -37,7 +34,6 @@ cache
 /home/ch/VirtualBox VMs
 /home/ch/.tor-browser-en
 /home/ch/mail/Trash
-/home/ch/virtualbox
-/home/docker
+/home/ch/src/docker
 /var/lib/docker
 /root/.cache
