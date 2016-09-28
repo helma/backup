@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# status bar
+killall status-bar-time.sh
+xsetroot -name "BACKUP RUNNING!"
+
 # mount
 mkdir -p /mnt/backup
 mkdir -p /mnt/storagebox
@@ -19,7 +23,13 @@ borg create --debug --progress --stats --exclude-caches --compression zlib  --ex
 # sync to storagebox
 rsync -rltzuv --delete /mnt/backup/backup/ /mnt/storagebox/
 
+# prune
+`$SCRIPTPATH/prune.rb`
+
 umount /mnt/backup
 rmdir /mnt/backup
 umount /mnt/storagebox
 rmdir /mnt/storagebox
+
+# status bar
+status-bar-time.sh
